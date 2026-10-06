@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eff5ef;
+}
+
+main {
+    max-width: 520px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin: 14px 0;
+}
+
+select, button {
+    padding: 10px;
+}
+
+button {
+    background: #173a2f;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+.password {
+    font-size: 28px;
+    font-weight: bold;
+}

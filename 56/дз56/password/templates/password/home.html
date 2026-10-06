@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор паролей</title>
+    <link rel="stylesheet" href="{% static 'password/style.css' %}">
+</head>
+<body>
+<main>
+    <h1>Генератор паролей</h1>
+    <p>Выбери настройки, и сайт создаст пароль.</p>
+    <form action="{% url 'password' %}">
+        <label>Длина пароля</label>
+        <select name="length">
+            {% for length in lengths %}
+                <option value="{{ length }}">{{ length }}</option>
+            {% endfor %}
+        </select>
+        <label><input type="checkbox" name="uppercase"> большие буквы</label>
+        <label><input type="checkbox" name="numbers"> цифры</label>
+        <label><input type="checkbox" name="special"> спец символы</label>
+        <button type="submit">Создать пароль</button>
+    </form>
+</main>
+</body>
+</html>

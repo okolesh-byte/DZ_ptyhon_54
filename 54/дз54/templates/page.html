@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page">
+    <p class="label">страница из базы данных</p>
+    <h1>{{ page.heading }}</h1>
+    <p class="lead">{{ page.lead }}</p>
+    <p>{{ page.body }}</p>
+</section>
+{% endblock %}

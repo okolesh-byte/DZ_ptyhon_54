@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Расходы</h1>
+<div class="cards">
+    {% for item in items %}
+        <article>
+            <h2>{{ item.name }}</h2>
+            <b>{{ item.value }}</b>
+            <p>{{ item.text }}</p>
+        </article>
+    {% endfor %}
+</div>
+<p class="notice">Если расход больше дохода, это уже финансовый риск и надо подумоть.</p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="small">мой маленький проект</p>
+        <h1>Учёт личных финансов</h1>
+        <p>Сайт помогает смотреть доходы, расходы и не тратить деньги совсем без плана.</p>
+    </div>
+    <img src="{{ url_for('static', filename='images/money.svg') }}" alt="finance">
+</section>
+{% endblock %}

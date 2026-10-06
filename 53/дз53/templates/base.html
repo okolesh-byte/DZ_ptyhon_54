@@ -2,18 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+<header class="top">
+    <a class="logo" href="{{ url_for('index') }}">Финансы студента</a>
     <nav>
-        <a href="/">Главная</a>
-        <a href="/about">О сайте</a>
-        <a href="/python">Python</a>
-        <a href="/contacts">Контакты</a>
+        {% for item in menu %}
+            <a class="{% if active == item.endpoint %}active{% endif %}" href="{{ url_for(item.endpoint) }}">{{ item.title }}</a>
+        {% endfor %}
     </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+</header>
+<main>
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    <p>Домашние задание по Flask, {{ year }}</p>
+</footer>
 </body>
 </html>
