@@ -1,0 +1,102 @@
+Задание 46
+
+1. Студенты какой кафедры и факультета сдавали социологию.
+SELECT DISTINCT Student.FIO, G.Kafedra, Kafedra.Decanat
+FROM Student, G, Kafedra, Exzamen
+WHERE Student.[Group] = G.[Group]
+AND G.Kafedra = Kafedra.Kafedra
+AND Student.ID_St = Exzamen.Id_St
+AND Exzamen.Predmet = 'Социология';
+
+2. Выведите кафедры, список студентов, список студентов в алфавитном порядке.
+SELECT G.Kafedra, Student.FIO
+FROM Student, G
+WHERE Student.[Group] = G.[Group]
+ORDER BY G.Kafedra, Student.FIO;
+
+3. Вывести номера зачеток только студентов физико-технического факультета.
+SELECT Zachetki.N_Z
+FROM Zachetki, Student, G, Kafedra
+WHERE Zachetki.Id_Studenta = Student.ID_St
+AND Student.[Group] = G.[Group]
+AND G.Kafedra = Kafedra.Kafedra
+AND Kafedra.Decanat = 'Физико-технический';
+
+4. Выведите студентов физико-технического факультета сдавших иностранный язык.
+SELECT DISTINCT Student.FIO
+FROM Student, G, Kafedra, Exzamen
+WHERE Student.[Group] = G.[Group]
+AND G.Kafedra = Kafedra.Kafedra
+AND Student.ID_St = Exzamen.Id_St
+AND Kafedra.Decanat = 'Физико-технический'
+AND Exzamen.Predmet = 'Иностр. язык'
+AND Exzamen.Ball IS NOT NULL;
+
+5. Подсчитать сколько различных предметов сдавалось в сессию.
+SELECT COUNT(DISTINCT Predmet) AS CountPredmet
+FROM Exzamen;
+
+6. Средний балл по экзаменам Васильевой.
+SELECT AVG(Exzamen.Ball) AS AvgBall
+FROM Student, Exzamen
+WHERE Student.ID_St = Exzamen.Id_St
+AND Student.FIO LIKE 'Васильева%';
+
+7. Определите сколько человек учится на каждой специальности.
+SELECT Special, COUNT(*) AS CountStudent
+FROM Student
+GROUP BY Special;
+
+8. Показать все группы физико-технического факультета.
+SELECT DISTINCT G.[Group]
+FROM G, Kafedra
+WHERE G.Kafedra = Kafedra.Kafedra
+AND Kafedra.Decanat = 'Физико-технический';
+
+9. Список фамилий студентов получивших 5 баллов по дифференциальным уравнениям.
+SELECT Student.FIO
+FROM Student, Exzamen
+WHERE Student.ID_St = Exzamen.Id_St
+AND Exzamen.Predmet = 'Дифференциальные уравнения'
+AND Exzamen.Ball = 5;
+
+10. Сколько экзаменов сдавал Шутов.
+SELECT COUNT(*) AS CountExam
+FROM Student, Exzamen
+WHERE Student.ID_St = Exzamen.Id_St
+AND Student.FIO LIKE 'Шутов%'
+AND Exzamen.Ball IS NOT NULL;
+
+11. Название кафедры студентов, не сдавших хотя бы один экзамен.
+SELECT DISTINCT G.Kafedra
+FROM Student, G, Exzamen
+WHERE Student.[Group] = G.[Group]
+AND Student.ID_St = Exzamen.Id_St
+AND Exzamen.Ball IS NULL;
+
+12. Количество кафедр на каждом факультете.
+SELECT Decanat, COUNT(*) AS CountKafedra
+FROM Kafedra
+GROUP BY Decanat;
+
+13. Количество пятерок на физико-математическом факультете.
+SELECT COUNT(*) AS CountFive
+FROM Student, G, Kafedra, Exzamen
+WHERE Student.[Group] = G.[Group]
+AND G.Kafedra = Kafedra.Kafedra
+AND Student.ID_St = Exzamen.Id_St
+AND Kafedra.Decanat = 'Физико-математический'
+AND Exzamen.Ball = 5;
+
+14. Номера зачетных книжек группы ФТ151.
+SELECT Zachetki.N_Z
+FROM Zachetki, Student
+WHERE Zachetki.Id_Studenta = Student.ID_St
+AND Student.[Group] = 'ФТ151';
+
+15. Перечень специальностей физико-математического факультета.
+SELECT DISTINCT Student.Special
+FROM Student, G, Kafedra
+WHERE Student.[Group] = G.[Group]
+AND G.Kafedra = Kafedra.Kafedra
+AND Kafedra.Decanat = 'Физико-математический';

@@ -1,0 +1,110 @@
+Задание 44
+
+1. Определите для какого товара код поставщика не определен.
+SELECT ID, Produce, Material, Color, Size, Country, ID_salespeople, Price, Count, REM
+FROM Ware
+WHERE ID_salespeople IS NULL;
+
+2. Определить все товары, которые производятся в России.
+SELECT Produce, ID, Country
+FROM Ware
+WHERE Country = 'Россия';
+
+3. Удалите из таблицы все товары, которые произведены в Германии.
+DELETE FROM Ware
+WHERE Country = 'Германия';
+
+4. Замените страну-производителя Польшу на Россию.
+UPDATE Ware
+SET Country = 'Россия'
+WHERE Country = 'Польша';
+
+5. Восстановите строки, удаленные в 3 пункте.
+-- Перед удалением надо было сделать копию таблицы.
+-- Например:
+INSERT INTO Ware
+SELECT * FROM Ware_copy
+WHERE Country = 'Германия';
+
+6. Выведите весь товар, который не черного цвета.
+SELECT Produce, Price, ID
+FROM Ware
+WHERE Color <> 'ч';
+
+7. Вставьте строку NTC-117BK Micro Camera Case, нейлон, ч, 13,3x8,3x5,7, 2016, Уганда, 1046.
+INSERT INTO Ware (Produce, Material, Color, Size, ID_salespeople, Country, ID)
+VALUES ('NTC-117BK Micro Camera Case', 'нейлон', 'ч', '13,3x8,3x5,7', 2016, 'Уганда', 1046);
+
+8. Вставьте строку POC-463BK Compact Camera Case, полиэстер, ч, 11x7x4,5, остальные данные не определены.
+INSERT INTO Ware (Produce, Material, Color, Size)
+VALUES ('POC-463BK Compact Camera Case', 'полиэстер', 'ч', '11x7x4,5');
+
+9. Вывести весь товар, который поставляет продавец с кодом 2065 из России.
+SELECT *
+FROM Ware
+WHERE ID_salespeople = 2065 AND Country = 'Россия';
+
+10. Вывести товар, цена за который находится в диапазоне от 200 до 345.
+SELECT *
+FROM Ware
+WHERE Price BETWEEN 200 AND 345;
+
+11. Определите все сумки из кожи с размером не менее 40x30x5.
+SELECT *
+FROM Ware
+WHERE Material LIKE '%кож%' AND Size >= '40x30x5';
+
+12. Запрос, который выводит все сумки и коды их поставщиков, если товара меньше чем на 1200.
+SELECT Produce, ID_salespeople
+FROM Ware
+WHERE Count < 1200;
+
+13. Заменить код поставщика на 2000, если на складе хранится товара менее чем на 500.
+UPDATE Ware
+SET ID_salespeople = 2000
+WHERE Count < 500;
+
+14. Вывести все кожаные сумки, количество которых менее 5 шт. и общая сумма товара не превышает 450.
+SELECT *
+FROM Ware
+WHERE Material LIKE '%кож%' AND Count < 5 AND Price * Count <= 450;
+
+15. Вывести все нейлоновые сумки цена на которые не превышает 250.
+SELECT *
+FROM Ware
+WHERE Material = 'нейлон' AND Price <= 250;
+
+16. Замените материал нейлон на брезент, если сумка стоит менее 200.
+UPDATE Ware
+SET Material = 'брезент'
+WHERE Material = 'нейлон' AND Price < 200;
+
+17. Выводит все сумки, у которых есть косметички.
+SELECT *
+FROM Ware
+WHERE REM LIKE '%косметич%';
+
+18. Покажет все кожаные сумки черного цвета китайского производства.
+SELECT *
+FROM Ware
+WHERE Material LIKE '%кож%' AND Color = 'ч' AND Country = 'Китай';
+
+19. Покажет все сумки с размером более 15 дюймов.
+SELECT *
+FROM Ware
+WHERE REM LIKE '%15%';
+
+20. Покажет всех поставщиков сумок не черного цвета.
+SELECT DISTINCT ID_salespeople
+FROM Ware
+WHERE Color <> 'ч';
+
+21. Замените материал полиэстер у сумок китайского производства на нейлон.
+UPDATE Ware
+SET Material = 'нейлон'
+WHERE Material = 'полиэстер' AND Country = 'Китай';
+
+22. В записях с кодом товара: 1015, 1041, 1032, 1010 материал нейлон заменить на полиэстер если страна-производитель Китай.
+UPDATE Ware
+SET Material = 'полиэстер'
+WHERE ID IN (1015, 1041, 1032, 1010) AND Material = 'нейлон' AND Country = 'Китай';
