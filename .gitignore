@@ -1,0 +1,17 @@
+.venv/
+.idea/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# runtime databases created when scripts are launched
+students.db
+shop.db
+library.db
+shop_sqlalchemy.db
+site.db
+
+# OS files
+.DS_Store
+Thumbs.db
